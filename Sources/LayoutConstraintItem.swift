@@ -51,6 +51,11 @@ extension LayoutConstraintItem {
         if let view = self as? ConstraintView {
             return view
         }
+        
+        if #available(iOS 9.0, OSX 10.11, *), let guide = self as? ConstraintLayoutGuide {
+            return guide.owningView
+        }
+        
         return nil
     }
     
