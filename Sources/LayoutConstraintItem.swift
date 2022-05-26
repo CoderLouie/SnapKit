@@ -47,13 +47,13 @@ extension LayoutConstraintItem {
         }
     }
     
-    internal var view: ConstraintView? {
+    internal var snp: ConstraintBasicAttributesDSL? {
         if let view = self as? ConstraintView {
-            return view
+            return view.snp
         }
         
         if #available(iOS 9.0, OSX 10.11, *), let guide = self as? ConstraintLayoutGuide {
-            return guide.owningView
+            return guide.snp
         }
         
         return nil

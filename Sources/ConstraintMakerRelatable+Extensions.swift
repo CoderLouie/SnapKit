@@ -31,11 +31,11 @@
 extension ConstraintMakerRelatable {
   
     @discardableResult
-    public func equalToSelf(_ keyPath: KeyPath<ConstraintViewDSL, ConstraintItem>, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
-        guard let view = self.description.item.view else {
-            fatalError("Expected view but found nil when attempting make constraint `equalToSelf`.")
+    public func equalToSelf(_ keyPath: KeyPath<ConstraintBasicAttributesDSL, ConstraintItem>, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+        guard let snp = self.description.item.snp else {
+            fatalError("Expected snp but found nil when attempting make constraint `equalToSelf`.")
         }
-        return equalTo(view.snp[keyPath: keyPath], file, line)
+        return equalTo(snp[keyPath: keyPath], file, line)
     }
     
     @discardableResult
