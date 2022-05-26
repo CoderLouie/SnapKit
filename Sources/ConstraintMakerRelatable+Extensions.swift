@@ -32,7 +32,7 @@ extension ConstraintMakerRelatable {
   
     @discardableResult
     public func equalToSelf(_ keyPath: KeyPath<ConstraintBasicAttributesDSL, ConstraintItem>, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
-        guard let snp = self.description.item.snp else {
+        guard let snp = self.description.item._snp else {
             fatalError("Expected snp but found nil when attempting make constraint `equalToSelf`.")
         }
         return equalTo(snp[keyPath: keyPath], file, line)
