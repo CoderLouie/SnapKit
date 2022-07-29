@@ -28,10 +28,12 @@
 #endif
 
 public class ConstraintMaker {
+    @discardableResult
     public func widthHeightRatioEqualTo(_ amount: ConstraintMultiplierTarget) -> ConstraintMakerEditable {
         return makeExtendableWithAttributes(.width)
             .equalToSelfHeight().multipliedBy(amount)
     }
+    @discardableResult
     public func heightWidthRatioEqualTo(_ amount: ConstraintMultiplierTarget) -> ConstraintMakerEditable {
         return makeExtendableWithAttributes(.height)
             .equalToSelfWidth().multipliedBy(amount)
