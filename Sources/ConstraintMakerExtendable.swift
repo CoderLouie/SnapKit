@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -78,7 +78,7 @@ public class ConstraintMakerExtendable: ConstraintMakerRelatable {
     public var centerY: ConstraintMakerExtendable {
         self.description.attributes += .centerY
         return self
-    } 
+    }
     
     public var lastBaseline: ConstraintMakerExtendable {
         self.description.attributes += .lastBaseline
@@ -176,10 +176,10 @@ public class ConstraintMakerExtendable: ConstraintMakerRelatable {
     
     @available(iOS 8.0, *)
     public var directionalMargins: ConstraintMakerExtendable {
-      self.description.attributes += .directionalMargins
-      return self
+        self.description.attributes += .directionalMargins
+        return self
     }
-
+    
     @available(iOS 8.0, *)
     public var centerWithinMargins: ConstraintMakerExtendable {
         self.description.attributes += .centerWithinMargins

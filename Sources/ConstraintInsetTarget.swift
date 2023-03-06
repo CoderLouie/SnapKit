@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -50,7 +50,7 @@ extension ConstraintInsets: ConstraintInsetTarget {
 }
 
 extension ConstraintInsetTarget {
-
+    
     internal var constraintInsetTargetValue: ConstraintInsets {
         if let amount = self as? ConstraintInsets {
             return amount

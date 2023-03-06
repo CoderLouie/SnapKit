@@ -28,73 +28,75 @@
 #endif
 
 
-internal struct ConstraintAttributes : OptionSet, ExpressibleByIntegerLiteral {
+internal struct ConstraintAttributes: OptionSet, RawRepresentable {
     
-    typealias IntegerLiteralType = UInt
+    typealias RawValue = UInt
     
-    internal init(rawValue: UInt) {
+    internal init(rawValue: RawValue) {
         self.rawValue = rawValue
     }
-    internal init(_ rawValue: UInt) {
+    internal init(_ rawValue: RawValue) {
         self.init(rawValue: rawValue)
     }
+    
+    internal private(set) var rawValue: RawValue
+    
+    internal var boolValue: Bool { return self.rawValue != 0 }
+}
+
+extension ConstraintAttributes: ExpressibleByNilLiteral {
     internal init(nilLiteral: ()) {
         self.rawValue = 0
     }
-    internal init(integerLiteral rawValue: IntegerLiteralType) {
+}
+
+extension ConstraintAttributes: ExpressibleByIntegerLiteral {
+    internal init(integerLiteral rawValue: RawValue) {
         self.init(rawValue: rawValue)
     }
-    
-    internal private(set) var rawValue: UInt
-    internal static var allZeros: ConstraintAttributes { return 0 }
-    internal static func convertFromNilLiteral() -> ConstraintAttributes { return 0 }
-    internal var boolValue: Bool { return self.rawValue != 0 }
-    
-    internal func toRaw() -> UInt { return self.rawValue }
-    internal static func fromRaw(_ raw: UInt) -> ConstraintAttributes? { return self.init(raw) }
-    internal static func fromMask(_ raw: UInt) -> ConstraintAttributes { return self.init(raw) }
-    
+}
+
+extension ConstraintAttributes {
     // normal
-    
     internal static let none: ConstraintAttributes = 0
-    internal static let left: ConstraintAttributes = ConstraintAttributes(UInt(1) << 0)
-    internal static let top: ConstraintAttributes = ConstraintAttributes(UInt(1) << 1)
-    internal static let right: ConstraintAttributes = ConstraintAttributes(UInt(1) << 2)
-    internal static let bottom: ConstraintAttributes = ConstraintAttributes(UInt(1) << 3)
-    internal static let leading: ConstraintAttributes = ConstraintAttributes(UInt(1) << 4)
-    internal static let trailing: ConstraintAttributes = ConstraintAttributes(UInt(1) << 5)
-    internal static let width: ConstraintAttributes = ConstraintAttributes(UInt(1) << 6)
-    internal static let height: ConstraintAttributes = ConstraintAttributes(UInt(1) << 7)
-    internal static let centerX: ConstraintAttributes = ConstraintAttributes(UInt(1) << 8)
-    internal static let centerY: ConstraintAttributes = ConstraintAttributes(UInt(1) << 9)
-    internal static let lastBaseline: ConstraintAttributes = ConstraintAttributes(UInt(1) << 10)
+    internal static let left: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 0)
+    internal static let top: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 1)
+    internal static let right: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 2)
+    internal static let bottom: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 3)
+    internal static let leading: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 4)
+    internal static let trailing: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 5)
+    internal static let width: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 6)
+    internal static let height: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 7)
+    internal static let centerX: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 8)
+    internal static let centerY: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 9)
+    internal static let lastBaseline: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 10)
     
     @available(iOS 8.0, OSX 10.11, *)
-    internal static let firstBaseline: ConstraintAttributes = ConstraintAttributes(UInt(1) << 11)
+    internal static let firstBaseline: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 11)
 
     @available(iOS 8.0, *)
-    internal static let leftMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 12)
+    internal static let leftMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 12)
 
     @available(iOS 8.0, *)
-    internal static let rightMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 13)
+    internal static let rightMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 13)
 
     @available(iOS 8.0, *)
-    internal static let topMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 14)
+    internal static let topMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 14)
 
     @available(iOS 8.0, *)
-    internal static let bottomMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 15)
+    internal static let bottomMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 15)
 
     @available(iOS 8.0, *)
-    internal static let leadingMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 16)
+    internal static let leadingMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 16)
 
     @available(iOS 8.0, *)
-    internal static let trailingMargin: ConstraintAttributes = ConstraintAttributes(UInt(1) << 17)
+    internal static let trailingMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 17)
 
     @available(iOS 8.0, *)
-    internal static let centerXWithinMargins: ConstraintAttributes = ConstraintAttributes(UInt(1) << 18)
+    internal static let centerXWithinMargins: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 18)
 
     @available(iOS 8.0, *)
-    internal static let centerYWithinMargins: ConstraintAttributes = ConstraintAttributes(UInt(1) << 19)
+    internal static let centerYWithinMargins: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 19)
     
     // aggregates
     
@@ -116,7 +118,7 @@ internal struct ConstraintAttributes : OptionSet, ExpressibleByIntegerLiteral {
     @available(iOS 8.0, *)
     internal static let centerWithinMargins: ConstraintAttributes = [.centerXWithinMargins, .centerYWithinMargins]
     
-    internal var layoutAttributes:[LayoutAttribute] {
+    internal var layoutAttributes: [LayoutAttribute] {
         var attrs = [LayoutAttribute]()
         if (self.contains(ConstraintAttributes.left)) {
             attrs.append(.left)

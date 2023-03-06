@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -95,6 +95,14 @@ public struct ConstraintViewDSL: ConstraintAttributesDSL {
     
     internal init(view: ConstraintView) {
         self.view = view
+    }
+    
+}
+
+public extension ConstraintView {
+    
+    var snp: ConstraintViewDSL {
+        return ConstraintViewDSL(view: self)
     }
     
 }

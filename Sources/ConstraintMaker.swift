@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 public class ConstraintMaker {
@@ -173,7 +173,7 @@ public class ConstraintMaker {
     public var directionalMargins: ConstraintMakerExtendable {
         return makeExtendableWithAttributes(.directionalMargins)
     }
-
+    
     @available(iOS 8.0, *)
     public var centerWithinMargins: ConstraintMakerExtendable {
         return makeExtendableWithAttributes(.centerWithinMargins)

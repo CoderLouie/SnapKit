@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -53,4 +53,14 @@ public struct ConstraintLayoutSupportDSL: ConstraintDSL {
     public var height: ConstraintItem {
         return ConstraintItem(target: target, attributes: ConstraintAttributes.height)
     }
+}
+
+
+@available(iOS 8.0, *)
+public extension ConstraintLayoutSupport {
+    
+    var snp: ConstraintLayoutSupportDSL {
+        return ConstraintLayoutSupportDSL(support: self)
+    }
+    
 }

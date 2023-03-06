@@ -48,12 +48,6 @@ public class ConstraintMakerEditable: ConstraintMakerPrioritizable {
     }
     
     @discardableResult
-    public func soffset(_ amount: ConstraintOffset) -> ConstraintMakerEditable {
-        self.description.constant = amount.value
-        return self
-    }
-    
-    @discardableResult
     public func inset(_ amount: ConstraintInsetTarget) -> ConstraintMakerEditable {
         description.constant = amount.constraintInsetTargetValue
         return self

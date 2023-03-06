@@ -36,11 +36,13 @@ public final class Constraint {
     private let to: ConstraintItem
     private let relation: ConstraintRelation
     private let multiplier: ConstraintMultiplierTarget
+    
     private var constant: ConstraintConstantTarget {
         didSet {
             self.updateConstantAndPriorityIfNeeded()
         }
     }
+    
     private var priority: ConstraintPriorityTarget {
         didSet {
           self.updateConstantAndPriorityIfNeeded()
@@ -52,19 +54,12 @@ public final class Constraint {
         set {
             if newValue {
                 activate()
-            }
-            else {
+            } else {
                 deactivate()
             }
         }
-        
         get {
-            for layoutConstraint in self.layoutConstraints {
-                if layoutConstraint.isActive {
-                    return true
-                }
-            }
-            return false
+            return layoutConstraints.contains(where: \.isActive)
         }
     }
     
@@ -78,6 +73,7 @@ public final class Constraint {
                   multiplier: ConstraintMultiplierTarget,
                   constant: ConstraintConstantTarget,
                   priority: ConstraintPriorityTarget) {
+        
         self.from = from
         self.to = to
         self.relation = relation
@@ -89,14 +85,14 @@ public final class Constraint {
         self.layoutConstraints = []
 
         // get attributes
-        let layoutFromAttributes = self.from.attributes.layoutAttributes
-        let layoutToAttributes = self.to.attributes.layoutAttributes
+        let layoutFromAttributes = from.attributes.layoutAttributes
+        let layoutToAttributes = to.attributes.layoutAttributes
 
         // get layout from
-        let layoutFrom = self.from.layoutConstraintItem!
+        let layoutFrom = from.layoutConstraintItem!
 
         // get relation
-        let layoutRelation = self.relation.layoutRelation
+        let layoutRelation = relation.layoutRelation
 
         for layoutFromAttribute in layoutFromAttributes {
             // get layout to attribute
@@ -195,12 +191,12 @@ public final class Constraint {
                 relatedBy: layoutRelation,
                 toItem: layoutTo,
                 attribute: layoutToAttribute,
-                multiplier: self.multiplier.constraintMultiplierTargetValue,
+                multiplier: multiplier.constraintMultiplierTargetValue,
                 constant: layoutConstant
             )
 
             // set label
-            layoutConstraint.label = self.label
+            layoutConstraint.label = label
 
             // set priority
             layoutConstraint.priority = LayoutPriority(rawValue: self.priority.constraintPriorityTargetValue)
@@ -260,7 +256,7 @@ public final class Constraint {
 
     internal func updateConstantAndPriorityIfNeeded() {
         for layoutConstraint in self.layoutConstraints {
-            let attribute = (layoutConstraint.secondAttribute == .notAnAttribute) ? layoutConstraint.firstAttribute : layoutConstraint.secondAttribute
+            let attribute = layoutConstraint.validAttribute
             layoutConstraint.constant = self.constant.constraintConstantTargetValueFor(layoutAttribute: attribute)
 
             let requiredPriority = ConstraintPriority.required.value
@@ -271,7 +267,7 @@ public final class Constraint {
     }
 
     internal func activateIfNeeded(updatingExisting: Bool = false) {
-        guard let item = self.from.layoutConstraintItem else {
+        guard let item = from.layoutConstraintItem else {
             print("WARNING: SnapKit failed to get from item from constraint. Activate will be a no-op.")
             return
         }
@@ -288,9 +284,8 @@ public final class Constraint {
                 guard let updateLayoutConstraint = existingLayoutConstraint else {
                     fatalError("Updated constraint could not find existing matching constraint to update: \(layoutConstraint)")
                 }
-
-                let updateLayoutAttribute = (updateLayoutConstraint.secondAttribute == .notAnAttribute) ? updateLayoutConstraint.firstAttribute : updateLayoutConstraint.secondAttribute
-                updateLayoutConstraint.constant = self.constant.constraintConstantTargetValueFor(layoutAttribute: updateLayoutAttribute)
+                
+                updateLayoutConstraint.constant = self.constant.constraintConstantTargetValueFor(layoutAttribute: updateLayoutConstraint.validAttribute)
             }
         } else {
             NSLayoutConstraint.activate(layoutConstraints)
