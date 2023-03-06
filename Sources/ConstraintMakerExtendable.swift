@@ -46,7 +46,7 @@ public final class ConstraintMakerExtendable {
             let selfAttributes = description.attributes
             let selfLayoutAttributes = selfAttributes.layoutAttributes
             
-            guard otherAttributes == .none ||
+            guard otherAttributes == ConstraintAttributes.none ||
                     otherLayoutAttributes.count <= 1 ||
                     otherLayoutAttributes == selfLayoutAttributes ||
                     otherAttributes == .edges && selfAttributes == .margins ||
