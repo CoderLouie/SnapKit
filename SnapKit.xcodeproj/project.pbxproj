@@ -28,7 +28,6 @@
 		EE235FAF1C5785D400C08960 /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FA71C5785D400C08960 /* ConstraintMakerFinalizable.swift */; };
 		EE235FB21C5785D400C08960 /* ConstraintMakerPrioritizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FA81C5785D400C08960 /* ConstraintMakerPrioritizable.swift */; };
 		EE235FB51C5785D400C08960 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FA91C5785D400C08960 /* ConstraintMakerEditable.swift */; };
-		EE235FB81C5785D400C08960 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FAA1C5785D400C08960 /* ConstraintMakerRelatable.swift */; };
 		EE235FBB1C5785D400C08960 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FAB1C5785D400C08960 /* ConstraintMakerExtendable.swift */; };
 		EE235FC01C5785DC00C08960 /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FBE1C5785DC00C08960 /* ConstraintViewDSL.swift */; };
 		EE235FC31C5785DC00C08960 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE235FBF1C5785DC00C08960 /* ConstraintLayoutSupportDSL.swift */; };
@@ -63,7 +62,6 @@
 		EE235FA71C5785D400C08960 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
 		EE235FA81C5785D400C08960 /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
 		EE235FA91C5785D400C08960 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerEditable.swift; sourceTree = "<group>"; };
-		EE235FAA1C5785D400C08960 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
 		EE235FAB1C5785D400C08960 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
 		EE235FBE1C5785DC00C08960 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintViewDSL.swift; sourceTree = "<group>"; };
 		EE235FBF1C5785DC00C08960 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
@@ -137,7 +135,6 @@
 				EE235FA71C5785D400C08960 /* ConstraintMakerFinalizable.swift */,
 				EE235FA81C5785D400C08960 /* ConstraintMakerPrioritizable.swift */,
 				EE235FA91C5785D400C08960 /* ConstraintMakerEditable.swift */,
-				EE235FAA1C5785D400C08960 /* ConstraintMakerRelatable.swift */,
 				EE235FAB1C5785D400C08960 /* ConstraintMakerExtendable.swift */,
 			);
 			name = Maker;
@@ -336,7 +333,6 @@
 			files = (
 				EE235FAF1C5785D400C08960 /* ConstraintMakerFinalizable.swift in Sources */,
 				EE235F971C5785CE00C08960 /* ConstraintConstantTarget.swift in Sources */,
-				EE235FB81C5785D400C08960 /* ConstraintMakerRelatable.swift in Sources */,
 				EE235F851C5785C600C08960 /* ConstraintAttributes.swift in Sources */,
 				EE235FA01C5785CE00C08960 /* ConstraintOffsetTarget.swift in Sources */,
 				EEF68F9E1D78492400980C26 /* ConstraintLayoutGuideDSL.swift in Sources */,

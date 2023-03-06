@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -73,28 +73,28 @@ extension ConstraintAttributes {
     
     @available(iOS 8.0, OSX 10.11, *)
     internal static let firstBaseline: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 11)
-
+    
     @available(iOS 8.0, *)
     internal static let leftMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 12)
-
+    
     @available(iOS 8.0, *)
     internal static let rightMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 13)
-
+    
     @available(iOS 8.0, *)
     internal static let topMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 14)
-
+    
     @available(iOS 8.0, *)
     internal static let bottomMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 15)
-
+    
     @available(iOS 8.0, *)
     internal static let leadingMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 16)
-
+    
     @available(iOS 8.0, *)
     internal static let trailingMargin: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 17)
-
+    
     @available(iOS 8.0, *)
     internal static let centerXWithinMargins: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 18)
-
+    
     @available(iOS 8.0, *)
     internal static let centerYWithinMargins: ConstraintAttributes = ConstraintAttributes(RawValue(1) << 19)
     
@@ -108,81 +108,81 @@ extension ConstraintAttributes {
     internal static let directionalVerticalEdges: ConstraintAttributes = [.top, .bottom]
     internal static let size: ConstraintAttributes = [.width, .height]
     internal static let center: ConstraintAttributes = [.centerX, .centerY]
-
+    
     @available(iOS 8.0, *)
     internal static let margins: ConstraintAttributes = [.leftMargin, .topMargin, .rightMargin, .bottomMargin]
-
+    
     @available(iOS 8.0, *)
     internal static let directionalMargins: ConstraintAttributes = [.leadingMargin, .topMargin, .trailingMargin, .bottomMargin]
-
+    
     @available(iOS 8.0, *)
     internal static let centerWithinMargins: ConstraintAttributes = [.centerXWithinMargins, .centerYWithinMargins]
     
     internal var layoutAttributes: [LayoutAttribute] {
         var attrs = [LayoutAttribute]()
-        if (self.contains(ConstraintAttributes.left)) {
+        if (self.contains(.left)) {
             attrs.append(.left)
         }
-        if (self.contains(ConstraintAttributes.top)) {
+        if (self.contains(.top)) {
             attrs.append(.top)
         }
-        if (self.contains(ConstraintAttributes.right)) {
+        if (self.contains(.right)) {
             attrs.append(.right)
         }
-        if (self.contains(ConstraintAttributes.bottom)) {
+        if (self.contains(.bottom)) {
             attrs.append(.bottom)
         }
-        if (self.contains(ConstraintAttributes.leading)) {
+        if (self.contains(.leading)) {
             attrs.append(.leading)
         }
-        if (self.contains(ConstraintAttributes.trailing)) {
+        if (self.contains(.trailing)) {
             attrs.append(.trailing)
         }
-        if (self.contains(ConstraintAttributes.width)) {
+        if (self.contains(.width)) {
             attrs.append(.width)
         }
-        if (self.contains(ConstraintAttributes.height)) {
+        if (self.contains(.height)) {
             attrs.append(.height)
         }
-        if (self.contains(ConstraintAttributes.centerX)) {
+        if (self.contains(.centerX)) {
             attrs.append(.centerX)
         }
-        if (self.contains(ConstraintAttributes.centerY)) {
+        if (self.contains(.centerY)) {
             attrs.append(.centerY)
         }
-        if (self.contains(ConstraintAttributes.lastBaseline)) {
+        if (self.contains(.lastBaseline)) {
             attrs.append(.lastBaseline)
         }
         
-        #if os(iOS) || os(tvOS)
-            if (self.contains(ConstraintAttributes.firstBaseline)) {
-                attrs.append(.firstBaseline)
-            }
-            if (self.contains(ConstraintAttributes.leftMargin)) {
-                attrs.append(.leftMargin)
-            }
-            if (self.contains(ConstraintAttributes.rightMargin)) {
-                attrs.append(.rightMargin)
-            }
-            if (self.contains(ConstraintAttributes.topMargin)) {
-                attrs.append(.topMargin)
-            }
-            if (self.contains(ConstraintAttributes.bottomMargin)) {
-                attrs.append(.bottomMargin)
-            }
-            if (self.contains(ConstraintAttributes.leadingMargin)) {
-                attrs.append(.leadingMargin)
-            }
-            if (self.contains(ConstraintAttributes.trailingMargin)) {
-                attrs.append(.trailingMargin)
-            }
-            if (self.contains(ConstraintAttributes.centerXWithinMargins)) {
-                attrs.append(.centerXWithinMargins)
-            }
-            if (self.contains(ConstraintAttributes.centerYWithinMargins)) {
-                attrs.append(.centerYWithinMargins)
-            }
-        #endif
+#if os(iOS) || os(tvOS)
+        if (self.contains(.firstBaseline)) {
+            attrs.append(.firstBaseline)
+        }
+        if (self.contains(.leftMargin)) {
+            attrs.append(.leftMargin)
+        }
+        if (self.contains(.rightMargin)) {
+            attrs.append(.rightMargin)
+        }
+        if (self.contains(.topMargin)) {
+            attrs.append(.topMargin)
+        }
+        if (self.contains(.bottomMargin)) {
+            attrs.append(.bottomMargin)
+        }
+        if (self.contains(.leadingMargin)) {
+            attrs.append(.leadingMargin)
+        }
+        if (self.contains(.trailingMargin)) {
+            attrs.append(.trailingMargin)
+        }
+        if (self.contains(.centerXWithinMargins)) {
+            attrs.append(.centerXWithinMargins)
+        }
+        if (self.contains(.centerYWithinMargins)) {
+            attrs.append(.centerYWithinMargins)
+        }
+#endif
         
         return attrs
     }

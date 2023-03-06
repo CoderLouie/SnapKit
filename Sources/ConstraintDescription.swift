@@ -22,9 +22,9 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 
@@ -44,8 +44,8 @@ public class ConstraintDescription {
         guard let relation = self.relation,
               let related = self.related,
               let sourceLocation = self.sourceLocation else {
-            return nil
-        }
+                  return nil
+              }
         let from = ConstraintItem(target: item, attributes: attributes)
         
         return Constraint(

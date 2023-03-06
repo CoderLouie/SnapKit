@@ -44,7 +44,6 @@ extension ConstraintDSL {
     public func label() -> String? {
         return objc_getAssociatedObject(target as Any, &labelKey) as? String
     }
-    
 }
 private var labelKey: UInt8 = 0
 

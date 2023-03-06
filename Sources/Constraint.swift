@@ -22,16 +22,16 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-    import UIKit
+import UIKit
 #else
-    import AppKit
+import AppKit
 #endif
 
 public final class Constraint {
-
+    
     internal let sourceLocation: (String, UInt)
     internal let label: String?
-
+    
     private let from: ConstraintItem
     private let to: ConstraintItem
     private let relation: ConstraintRelation
@@ -45,7 +45,7 @@ public final class Constraint {
     
     private var priority: ConstraintPriorityTarget {
         didSet {
-          self.updateConstantAndPriorityIfNeeded()
+            self.updateConstantAndPriorityIfNeeded()
         }
     }
     public var layoutConstraints: [LayoutConstraint]
@@ -64,7 +64,7 @@ public final class Constraint {
     }
     
     // MARK: Initialization
-
+    
     internal init(from: ConstraintItem,
                   to: ConstraintItem,
                   relation: ConstraintRelation,
@@ -83,107 +83,107 @@ public final class Constraint {
         self.constant = constant
         self.priority = priority
         self.layoutConstraints = []
-
+        
         // get attributes
         let layoutFromAttributes = from.attributes.layoutAttributes
         let layoutToAttributes = to.attributes.layoutAttributes
-
+        
         // get layout from
         let layoutFrom = from.layoutConstraintItem!
-
+        
         // get relation
         let layoutRelation = relation.layoutRelation
-
+        
         for layoutFromAttribute in layoutFromAttributes {
             // get layout to attribute
             let layoutToAttribute: LayoutAttribute
-            #if os(iOS) || os(tvOS)
-                if layoutToAttributes.count > 0 {
-                    if self.from.attributes == .edges && self.to.attributes == .margins {
-                        switch layoutFromAttribute {
-                        case .left:
-                            layoutToAttribute = .leftMargin
-                        case .right:
-                            layoutToAttribute = .rightMargin
-                        case .top:
-                            layoutToAttribute = .topMargin
-                        case .bottom:
-                            layoutToAttribute = .bottomMargin
-                        default:
-                            fatalError()
-                        }
-                    } else if self.from.attributes == .margins && self.to.attributes == .edges {
-                        switch layoutFromAttribute {
-                        case .leftMargin:
-                            layoutToAttribute = .left
-                        case .rightMargin:
-                            layoutToAttribute = .right
-                        case .topMargin:
-                            layoutToAttribute = .top
-                        case .bottomMargin:
-                            layoutToAttribute = .bottom
-                        default:
-                            fatalError()
-                        }
-                    } else if self.from.attributes == .directionalEdges && self.to.attributes == .directionalMargins {
-                      switch layoutFromAttribute {
-                      case .leading:
-                        layoutToAttribute = .leadingMargin
-                      case .trailing:
-                        layoutToAttribute = .trailingMargin
-                      case .top:
+#if os(iOS) || os(tvOS)
+            if layoutToAttributes.count > 0 {
+                if self.from.attributes == .edges && self.to.attributes == .margins {
+                    switch layoutFromAttribute {
+                    case .left:
+                        layoutToAttribute = .leftMargin
+                    case .right:
+                        layoutToAttribute = .rightMargin
+                    case .top:
                         layoutToAttribute = .topMargin
-                      case .bottom:
+                    case .bottom:
                         layoutToAttribute = .bottomMargin
-                      default:
+                    default:
                         fatalError()
-                      }
-                    } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
-                      switch layoutFromAttribute {
-                      case .leadingMargin:
-                        layoutToAttribute = .leading
-                      case .trailingMargin:
-                        layoutToAttribute = .trailing
-                      case .topMargin:
+                    }
+                } else if self.from.attributes == .margins && self.to.attributes == .edges {
+                    switch layoutFromAttribute {
+                    case .leftMargin:
+                        layoutToAttribute = .left
+                    case .rightMargin:
+                        layoutToAttribute = .right
+                    case .topMargin:
                         layoutToAttribute = .top
-                      case .bottomMargin:
+                    case .bottomMargin:
                         layoutToAttribute = .bottom
-                      default:
+                    default:
                         fatalError()
-                      }
-                    } else if self.from.attributes == self.to.attributes {
-                        layoutToAttribute = layoutFromAttribute
-                    } else {
-                        layoutToAttribute = layoutToAttributes[0]
                     }
-                } else {
-                    if self.to.target == nil && (layoutFromAttribute == .centerX || layoutFromAttribute == .centerY) {
-                        layoutToAttribute = layoutFromAttribute == .centerX ? .left : .top
-                    } else {
-                        layoutToAttribute = layoutFromAttribute
+                } else if self.from.attributes == .directionalEdges && self.to.attributes == .directionalMargins {
+                    switch layoutFromAttribute {
+                    case .leading:
+                        layoutToAttribute = .leadingMargin
+                    case .trailing:
+                        layoutToAttribute = .trailingMargin
+                    case .top:
+                        layoutToAttribute = .topMargin
+                    case .bottom:
+                        layoutToAttribute = .bottomMargin
+                    default:
+                        fatalError()
                     }
-                }
-            #else
-                if self.from.attributes == self.to.attributes {
+                } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
+                    switch layoutFromAttribute {
+                    case .leadingMargin:
+                        layoutToAttribute = .leading
+                    case .trailingMargin:
+                        layoutToAttribute = .trailing
+                    case .topMargin:
+                        layoutToAttribute = .top
+                    case .bottomMargin:
+                        layoutToAttribute = .bottom
+                    default:
+                        fatalError()
+                    }
+                } else if self.from.attributes == self.to.attributes {
                     layoutToAttribute = layoutFromAttribute
-                } else if layoutToAttributes.count > 0 {
+                } else {
                     layoutToAttribute = layoutToAttributes[0]
+                }
+            } else {
+                if self.to.target == nil && (layoutFromAttribute == .centerX || layoutFromAttribute == .centerY) {
+                    layoutToAttribute = layoutFromAttribute == .centerX ? .left : .top
                 } else {
                     layoutToAttribute = layoutFromAttribute
                 }
-            #endif
-
+            }
+#else
+            if self.from.attributes == self.to.attributes {
+                layoutToAttribute = layoutFromAttribute
+            } else if layoutToAttributes.count > 0 {
+                layoutToAttribute = layoutToAttributes[0]
+            } else {
+                layoutToAttribute = layoutFromAttribute
+            }
+#endif
+            
             // get layout constant
             let layoutConstant: CGFloat = self.constant.constraintConstantTargetValueFor(layoutAttribute: layoutToAttribute)
-
+            
             // get layout to
             var layoutTo: AnyObject? = self.to.target
-
+            
             // use superview if possible
             if layoutTo == nil && layoutToAttribute != .width && layoutToAttribute != .height {
                 layoutTo = layoutFrom.superview
             }
-
+            
             // create layout constraint
             let layoutConstraint = LayoutConstraint(
                 item: layoutFrom,
@@ -194,91 +194,91 @@ public final class Constraint {
                 multiplier: multiplier.constraintMultiplierTargetValue,
                 constant: layoutConstant
             )
-
+            
             // set label
             layoutConstraint.label = label
-
+            
             // set priority
             layoutConstraint.priority = LayoutPriority(rawValue: self.priority.constraintPriorityTargetValue)
-
+            
             // set constraint
             layoutConstraint.constraint = self
-
+            
             // append
             self.layoutConstraints.append(layoutConstraint)
         }
     }
-
+    
     // MARK: Public
-
+    
     public func activate() {
         self.activateIfNeeded()
     }
-
+    
     public func deactivate() {
         self.deactivateIfNeeded()
     }
-
+    
     @discardableResult
     public func update(offset: ConstraintOffsetTarget) -> Constraint {
         self.constant = offset.constraintOffsetTargetValue
         return self
     }
-
+    
     @discardableResult
     public func update(inset: ConstraintInsetTarget) -> Constraint {
         self.constant = inset.constraintInsetTargetValue
         return self
     }
-
-    #if os(iOS) || os(tvOS)
+    
+#if os(iOS) || os(tvOS)
     @discardableResult
     @available(iOS 11.0, tvOS 11.0, *)
     public func update(inset: ConstraintDirectionalInsetTarget) -> Constraint {
-      self.constant = inset.constraintDirectionalInsetTargetValue
-      return self
+        self.constant = inset.constraintDirectionalInsetTargetValue
+        return self
     }
-    #endif
-
+#endif
+    
     @discardableResult
     public func update(priority: ConstraintPriorityTarget) -> Constraint {
         self.priority = priority.constraintPriorityTargetValue
         return self
     }
-
+    
     @discardableResult
     public func update(priority: ConstraintPriority) -> Constraint {
         self.priority = priority.value
         return self
     }
- 
+    
     // MARK: Internal
-
+    
     internal func updateConstantAndPriorityIfNeeded() {
         for layoutConstraint in self.layoutConstraints {
             let attribute = layoutConstraint.validAttribute
             layoutConstraint.constant = self.constant.constraintConstantTargetValueFor(layoutAttribute: attribute)
-
+            
             let requiredPriority = ConstraintPriority.required.value
             if (layoutConstraint.priority.rawValue < requiredPriority), (self.priority.constraintPriorityTargetValue != requiredPriority) {
                 layoutConstraint.priority = LayoutPriority(rawValue: self.priority.constraintPriorityTargetValue)
             }
         }
     }
-
+    
     internal func activateIfNeeded(updatingExisting: Bool = false) {
         guard let item = from.layoutConstraintItem else {
             print("WARNING: SnapKit failed to get from item from constraint. Activate will be a no-op.")
             return
         }
         let layoutConstraints = self.layoutConstraints
-
+        
         if updatingExisting {
             var existingLayoutConstraints: [LayoutConstraint] = []
             for constraint in item.constraints {
                 existingLayoutConstraints += constraint.layoutConstraints
             }
-
+            
             for layoutConstraint in layoutConstraints {
                 let existingLayoutConstraint = existingLayoutConstraints.first { $0 == layoutConstraint }
                 guard let updateLayoutConstraint = existingLayoutConstraint else {
@@ -292,7 +292,7 @@ public final class Constraint {
             item.add(constraints: [self])
         }
     }
-
+    
     internal func deactivateIfNeeded() {
         guard let item = self.from.layoutConstraintItem else {
             print("WARNING: SnapKit failed to get from item from constraint. Deactivate will be a no-op.")

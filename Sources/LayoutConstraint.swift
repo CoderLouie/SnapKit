@@ -31,12 +31,8 @@ import AppKit
 public class LayoutConstraint : NSLayoutConstraint {
     
     public var label: String? {
-        get {
-            return identifier
-        }
-        set {
-            identifier = newValue
-        }
+        get { identifier }
+        set { identifier = newValue }
     }
     
     internal weak var constraint: Constraint? = nil

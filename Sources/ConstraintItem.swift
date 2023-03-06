@@ -41,7 +41,6 @@ public final class ConstraintItem {
     internal var layoutConstraintItem: LayoutConstraintItem? {
         return self.target as? LayoutConstraintItem
     }
-    
 }
 
 public func ==(lhs: ConstraintItem, rhs: ConstraintItem) -> Bool {
