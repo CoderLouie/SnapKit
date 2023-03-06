@@ -46,26 +46,26 @@ public final class ConstraintMakerExtendable {
             let selfAttributes = description.attributes
             let selfLayoutAttributes = selfAttributes.layoutAttributes
             
-            guard otherAttributes == ConstraintAttributes.none ||
+            guard otherAttributes == .none ||
                     otherLayoutAttributes.count <= 1 ||
                     otherLayoutAttributes == selfLayoutAttributes ||
                     otherAttributes == .edges && selfAttributes == .margins ||
-                    otherAttributes == .margins && selfAttributes == .edges ||
+                    otherAttributes == .margins ||
                     otherAttributes == .directionalEdges && selfAttributes == .directionalMargins ||
-                    otherAttributes == .directionalMargins && selfAttributes == .directionalEdges else {
+                    otherAttributes == .directionalMargins else {
                         fatalError("Cannot constraint to multiple non identical attributes. (\(file), \(line))");
                     }
             
             related = other
             constant = 0.0
         } else if let other = other as? ConstraintView {
-            related = ConstraintItem(target: other, attributes: ConstraintAttributes.none)
+            related = ConstraintItem(target: other, attributes: .none)
             constant = 0.0
         } else if let other = other as? ConstraintConstantTarget {
-            related = ConstraintItem(target: nil, attributes: ConstraintAttributes.none)
+            related = ConstraintItem(target: nil, attributes: .none)
             constant = other
         } else if #available(iOS 9.0, OSX 10.11, *), let other = other as? ConstraintLayoutGuide {
-            related = ConstraintItem(target: other, attributes: ConstraintAttributes.none)
+            related = ConstraintItem(target: other, attributes: .none)
             constant = 0.0
         } else {
             fatalError("Invalid constraint. (\(file), \(line))")

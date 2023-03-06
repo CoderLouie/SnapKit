@@ -85,8 +85,9 @@ public final class Constraint {
         self.layoutConstraints = []
         
         // get attributes
-        let layoutFromAttributes = from.attributes.layoutAttributes
-        let layoutToAttributes = to.attributes.layoutAttributes
+        let fromAttributes = from.attributes
+        let toAttributes = to.attributes
+        let toLayoutAttributes = toAttributes.layoutAttributes
         
         // get layout from
         let layoutFrom = from.layoutConstraintItem!
@@ -94,12 +95,12 @@ public final class Constraint {
         // get relation
         let layoutRelation = relation.layoutRelation
         
-        for layoutFromAttribute in layoutFromAttributes {
+        for layoutFromAttribute in fromAttributes.layoutAttributes {
             // get layout to attribute
             let layoutToAttribute: LayoutAttribute
 #if os(iOS) || os(tvOS)
-            if layoutToAttributes.count > 0 {
-                if self.from.attributes == .edges && self.to.attributes == .margins {
+            if toLayoutAttributes.count > 0 {
+                if self.to.attributes == .margins {
                     switch layoutFromAttribute {
                     case .left:
                         layoutToAttribute = .leftMargin
@@ -109,8 +110,7 @@ public final class Constraint {
                         layoutToAttribute = .topMargin
                     case .bottom:
                         layoutToAttribute = .bottomMargin
-                    default:
-                        fatalError()
+                    default: fatalError()
                     }
                 } else if self.from.attributes == .margins && self.to.attributes == .edges {
                     switch layoutFromAttribute {
@@ -122,10 +122,9 @@ public final class Constraint {
                         layoutToAttribute = .top
                     case .bottomMargin:
                         layoutToAttribute = .bottom
-                    default:
-                        fatalError()
+                    default: fatalError()
                     }
-                } else if self.from.attributes == .directionalEdges && self.to.attributes == .directionalMargins {
+                } else if self.to.attributes == .directionalMargins {
                     switch layoutFromAttribute {
                     case .leading:
                         layoutToAttribute = .leadingMargin
@@ -135,8 +134,7 @@ public final class Constraint {
                         layoutToAttribute = .topMargin
                     case .bottom:
                         layoutToAttribute = .bottomMargin
-                    default:
-                        fatalError()
+                    default: fatalError()
                     }
                 } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
                     switch layoutFromAttribute {
@@ -148,13 +146,12 @@ public final class Constraint {
                         layoutToAttribute = .top
                     case .bottomMargin:
                         layoutToAttribute = .bottom
-                    default:
-                        fatalError()
+                    default: fatalError()
                     }
                 } else if self.from.attributes == self.to.attributes {
                     layoutToAttribute = layoutFromAttribute
                 } else {
-                    layoutToAttribute = layoutToAttributes[0]
+                    layoutToAttribute = toLayoutAttributes[0]
                 }
             } else {
                 if self.to.target == nil && (layoutFromAttribute == .centerX || layoutFromAttribute == .centerY) {
@@ -174,10 +171,10 @@ public final class Constraint {
 #endif
             
             // get layout constant
-            let layoutConstant: CGFloat = self.constant.constraintConstantTargetValueFor(layoutAttribute: layoutToAttribute)
+            let layoutConstant = constant.constraintConstantTargetValueFor(layoutAttribute: layoutToAttribute)
             
             // get layout to
-            var layoutTo: AnyObject? = self.to.target
+            var layoutTo = to.target
             
             // use superview if possible
             if layoutTo == nil && layoutToAttribute != .width && layoutToAttribute != .height {
