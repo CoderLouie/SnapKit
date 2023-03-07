@@ -100,19 +100,24 @@ public final class Constraint {
             let layoutToAttribute: LayoutAttribute
 #if os(iOS) || os(tvOS)
             if toLayoutAttributes.count > 0 {
-                if self.to.attributes == .margins {
+                if toAttributes == .margins ||
+                    toAttributes == .directionalMargins {
                     switch layoutFromAttribute {
                     case .left:
                         layoutToAttribute = .leftMargin
                     case .right:
                         layoutToAttribute = .rightMargin
+                    case .leading:
+                        layoutToAttribute = .leadingMargin
+                    case .trailing:
+                        layoutToAttribute = .trailingMargin
                     case .top:
                         layoutToAttribute = .topMargin
                     case .bottom:
                         layoutToAttribute = .bottomMargin
                     default: fatalError()
                     }
-                } else if self.from.attributes == .margins && self.to.attributes == .edges {
+                } else if fromAttributes == .margins && toAttributes == .edges {
                     switch layoutFromAttribute {
                     case .leftMargin:
                         layoutToAttribute = .left
@@ -124,19 +129,7 @@ public final class Constraint {
                         layoutToAttribute = .bottom
                     default: fatalError()
                     }
-                } else if self.to.attributes == .directionalMargins {
-                    switch layoutFromAttribute {
-                    case .leading:
-                        layoutToAttribute = .leadingMargin
-                    case .trailing:
-                        layoutToAttribute = .trailingMargin
-                    case .top:
-                        layoutToAttribute = .topMargin
-                    case .bottom:
-                        layoutToAttribute = .bottomMargin
-                    default: fatalError()
-                    }
-                } else if self.from.attributes == .directionalMargins && self.to.attributes == .directionalEdges {
+                } else if fromAttributes == .directionalMargins && toAttributes == .directionalEdges {
                     switch layoutFromAttribute {
                     case .leadingMargin:
                         layoutToAttribute = .leading
@@ -148,7 +141,7 @@ public final class Constraint {
                         layoutToAttribute = .bottom
                     default: fatalError()
                     }
-                } else if self.from.attributes == self.to.attributes {
+                } else if fromAttributes == toAttributes {
                     layoutToAttribute = layoutFromAttribute
                 } else {
                     layoutToAttribute = toLayoutAttributes[0]
@@ -157,7 +150,7 @@ public final class Constraint {
                 layoutToAttribute = layoutFromAttribute
             }
 #else
-            if self.from.attributes == self.to.attributes {
+            if fromAttributes == toAttributes {
                 layoutToAttribute = layoutFromAttribute
             } else if layoutToAttributes.count > 0 {
                 layoutToAttribute = layoutToAttributes[0]

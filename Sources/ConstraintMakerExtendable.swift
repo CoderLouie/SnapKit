@@ -122,6 +122,26 @@ public final class ConstraintMakerExtendable {
 extension ConstraintMakerExtendable {
     
     @discardableResult
+    public func offset(_ amount: ConstraintOffsetTarget) -> ConstraintMakerEditable {
+        return equalToSuperview().offset(amount)
+    }
+    
+    @discardableResult
+    public func inset(_ amount: ConstraintInsetTarget) -> ConstraintMakerEditable {
+        return equalToSuperview().inset(amount)
+    }
+}
+
+extension ConstraintMakerExtendable {
+    @discardableResult
+    public func equalToSuperviewMargin(_ file: String = #file, line: UInt = #line) -> ConstraintMakerEditable {
+        guard let other = description.item.superview else {
+            fatalError("Expected superview but found nil when attempting make constraint `equalToSuperview`.")
+        }
+        return relatedTo(other.snp.margins, relation: .equal, file: file, line: line)
+    }
+    
+    @discardableResult
     public func equalToSelf(_ keyPath: KeyPath<ConstraintAttributesDSL, ConstraintItem>, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
         guard let snp = description.item._snp else {
             fatalError("Expected snp but found nil when attempting make constraint `equalToSelf`.")
