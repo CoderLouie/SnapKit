@@ -252,4 +252,11 @@ extension ConstraintMaker {
     public var vertical: ConstraintMakerExtendable {
         return makeExtendableWithAttributes([.top, .bottom])
     }
+     
+    public var topTrailing: ConstraintMakerExtendable {
+        return makeExtendableWithAttributes([.top, .trailing])
+    }
+    public var bottomLeading: ConstraintMakerExtendable {
+        return makeExtendableWithAttributes([.bottom, .trailing])
+    }
 }
