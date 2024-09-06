@@ -21,7 +21,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 #else
 import AppKit
@@ -154,7 +154,7 @@ extension ConstraintAttributes {
             attrs.append(.lastBaseline)
         }
         
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
         if (self.contains(.firstBaseline)) {
             attrs.append(.firstBaseline)
         }

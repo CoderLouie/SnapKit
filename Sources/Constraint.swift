@@ -20,8 +20,9 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+ 
 
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
 import UIKit
 #else
 import AppKit
@@ -98,7 +99,8 @@ public final class Constraint {
         for layoutFromAttribute in fromAttributes.layoutAttributes {
             // get layout to attribute
             let layoutToAttribute: LayoutAttribute
-#if os(iOS) || os(tvOS)
+
+#if canImport(UIKit)
             if toLayoutAttributes.count > 0 {
                 if toAttributes == .margins ||
                     toAttributes == .directionalMargins {
@@ -224,8 +226,7 @@ public final class Constraint {
         self.constant = inset.constraintInsetTargetValue
         return self
     }
-    
-#if os(iOS) || os(tvOS)
+#if canImport(UIKit)
     @discardableResult
     @available(iOS 11.0, tvOS 11.0, *)
     public func update(inset: ConstraintDirectionalInsetTarget) -> Constraint {
