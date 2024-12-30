@@ -113,3 +113,40 @@ public class ConstraintMakerRelatable {
         return self.relatedTo(other, relation: .greaterThanOrEqual, file: file, line: line)
     }
 }
+
+extension ConstraintMakerRelatable {
+    
+    private func relatedTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, relation: ConstraintRelation, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+        let item = description.item
+        if let t = item as? ConstraintView {
+            return self.relatedTo(other(t.snp), relation: relation, file: file, line: line)
+        }
+        if let t = item as? ConstraintLayoutGuide {
+            return self.relatedTo(other(t.snp), relation: relation, file: file, line: line)
+        }
+        fatalError("Expected description.item is View or LayoutGuide")
+    }
+    
+    @discardableResult
+    public func equalTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+        relatedTo(other, relation: .equal, file, line)
+    }
+    
+    @discardableResult
+    public func lessThanOrEqualTo(_ other:  (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+        relatedTo(other, relation: .lessThanOrEqual, file, line)
+    }
+    
+    @discardableResult
+    public func greaterThanOrEqualTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, line: UInt = #line) -> ConstraintMakerEditable {
+        relatedTo(other, relation: .greaterThanOrEqual, file, line)
+    }
+    
+    func test() {
+        let v = UIView()
+        v.snp.makeConstraints { make in
+//            make.width.equalTo(\.height).multipliedBy(1.0)
+            make.verticalEdges.equalTo(0)
+        }
+    }
+}

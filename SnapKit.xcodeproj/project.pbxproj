@@ -242,13 +242,13 @@
 			isa = PBXGroup;
 			children = (
 				B6CD70902D22A89E00037F19 /* Debugging */,
-				B6CD708F2D22A87600037F19 /* Models */,
-				B6CD708E2D22A86000037F19 /* Targets */,
-				B6CD708D2D22A82D00037F19 /* Maker */,
 				B6CD708C2D22A81800037F19 /* DSLs */,
 				B6CD708B2D22A7F400037F19 /* Extensions */,
-				EECDB3681AC0C95C006BBC11 /* Tests */,
+				B6CD708D2D22A82D00037F19 /* Maker */,
+				B6CD708F2D22A87600037F19 /* Models */,
 				EEECE4BC2B4160D200738EF0 /* PrivacyInfo.xcprivacy */,
+				B6CD708E2D22A86000037F19 /* Targets */,
+				EECDB3681AC0C95C006BBC11 /* Tests */,
 			);
 			path = Sources;
 			sourceTree = "<group>";

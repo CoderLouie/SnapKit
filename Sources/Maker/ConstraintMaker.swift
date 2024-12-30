@@ -217,3 +217,18 @@ public class ConstraintMaker {
     }
     
 }
+
+extension ConstraintMaker {
+    public var dirEdges: ConstraintMakerExtendable {
+        makeExtendableWithAttributes([.leading, .trailing, .top, .bottom])
+    }
+    public var dirHorEdges: ConstraintMakerExtendable {
+        makeExtendableWithAttributes([.leading, .trailing])
+    }
+    public var minXY: ConstraintMakerExtendable {
+        makeExtendableWithAttributes([.leading, .top])
+    }
+    public var maxXY: ConstraintMakerExtendable {
+        makeExtendableWithAttributes([.trailing, .bottom])
+    }
+}
