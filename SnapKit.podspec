@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.13'
   s.tvos.deployment_target = '12.0' 
 
-  s.source_files = 'Sources/*.swift'
+  s.source_files = 'Sources/**/*.swift'
 
   s.libraries = 'swiftCoreGraphics'
 
