@@ -8,11 +8,11 @@ Pod::Spec.new do |s|
   s.social_media_url = 'http://twitter.com/robertjpayne'
   s.source = { :git => 'https://github.com/SnapKit/SnapKit.git', :tag => '5.7.1' }
 
-  s.ios.deployment_target = '12.0'
+  s.ios.deployment_target = '11.0'
   s.osx.deployment_target = '10.13'
   s.tvos.deployment_target = '12.0'
 
-  s.source_files = 'Sources/*.swift'
+  s.source_files = 'Sources/**/*.swift'
 
   s.libraries = 'swiftCoreGraphics'
 

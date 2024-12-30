@@ -121,26 +121,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DDC9FD8C1981B4DD009612C7 = {
-			isa = PBXGroup;
-			children = (
-				EE6DB557251D9A6B00E0C374 /* Supporting Files */,
-				EECDB35D1AC0C95C006BBC11 /* Sources */,
-				EE94F60C1AC0F113008767FF /* Frameworks */,
-				DDC9FD961981B4DD009612C7 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		DDC9FD961981B4DD009612C7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EEBCC9D819CC627D0083B827 /* SnapKit.framework */,
-				EEBCC9E219CC627E0083B827 /* SnapKit Tests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EE235F581C57858700C08960 /* Extensions */ = {
+		B6CD708B2D22A7F400037F19 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				EE235FC61C5785E200C08960 /* ConstraintView+Extensions.swift */,
@@ -148,10 +129,10 @@
 				EEF68FB31D784FBA00980C26 /* UILayoutSupport+Extensions.swift */,
 				3CA7D6C124592D4D005E10C2 /* ConstraintMakerRelatable+Extensions.swift */,
 			);
-			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
-		EE235F591C57859200C08960 /* DSLs */ = {
+		B6CD708C2D22A81800037F19 /* DSLs */ = {
 			isa = PBXGroup;
 			children = (
 				EEF68FA51D784A5300980C26 /* ConstraintDSL.swift */,
@@ -159,10 +140,10 @@
 				EEF68F9D1D78492400980C26 /* ConstraintLayoutGuideDSL.swift */,
 				EE235FBF1C5785DC00C08960 /* ConstraintLayoutSupportDSL.swift */,
 			);
-			name = DSLs;
+			path = DSLs;
 			sourceTree = "<group>";
 		};
-		EE235F5A1C57859900C08960 /* Maker */ = {
+		B6CD708D2D22A82D00037F19 /* Maker */ = {
 			isa = PBXGroup;
 			children = (
 				EE235FA61C5785D400C08960 /* ConstraintMaker.swift */,
@@ -172,10 +153,10 @@
 				EE235FAA1C5785D400C08960 /* ConstraintMakerRelatable.swift */,
 				EE235FAB1C5785D400C08960 /* ConstraintMakerExtendable.swift */,
 			);
-			name = Maker;
+			path = Maker;
 			sourceTree = "<group>";
 		};
-		EE235F5B1C57859E00C08960 /* Targets */ = {
+		B6CD708E2D22A86000037F19 /* Targets */ = {
 			isa = PBXGroup;
 			children = (
 				EE235F8E1C5785CE00C08960 /* ConstraintRelatableTarget.swift */,
@@ -186,10 +167,10 @@
 				EE235F931C5785CE00C08960 /* ConstraintInsetTarget.swift */,
 				7E1CB2AD227BB5520066B6C0 /* ConstraintDirectionalInsetTarget.swift */,
 			);
-			name = Targets;
+			path = Targets;
 			sourceTree = "<group>";
 		};
-		EE235F5C1C5785A400C08960 /* Models */ = {
+		B6CD708F2D22A87600037F19 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				2DBA080D1F1FAD66001CFED4 /* Typealiases.swift */,
@@ -208,15 +189,34 @@
 				EE6898CA1DA7B3A100D47F33 /* LayoutConstraintItem.swift */,
 				EE6087741E4F133E0029CF84 /* ConstraintPriority.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		EE235F5D1C5785AC00C08960 /* Debugging */ = {
+		B6CD70902D22A89E00037F19 /* Debugging */ = {
 			isa = PBXGroup;
 			children = (
 				EE235F5E1C5785BC00C08960 /* Debugging.swift */,
 			);
-			name = Debugging;
+			path = Debugging;
+			sourceTree = "<group>";
+		};
+		DDC9FD8C1981B4DD009612C7 = {
+			isa = PBXGroup;
+			children = (
+				EE6DB557251D9A6B00E0C374 /* Supporting Files */,
+				EECDB35D1AC0C95C006BBC11 /* Sources */,
+				EE94F60C1AC0F113008767FF /* Frameworks */,
+				DDC9FD961981B4DD009612C7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDC9FD961981B4DD009612C7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EEBCC9D819CC627D0083B827 /* SnapKit.framework */,
+				EEBCC9E219CC627E0083B827 /* SnapKit Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EE6DB557251D9A6B00E0C374 /* Supporting Files */ = {
@@ -241,12 +241,12 @@
 		EECDB35D1AC0C95C006BBC11 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				EE235F581C57858700C08960 /* Extensions */,
-				EE235F591C57859200C08960 /* DSLs */,
-				EE235F5A1C57859900C08960 /* Maker */,
-				EE235F5B1C57859E00C08960 /* Targets */,
-				EE235F5C1C5785A400C08960 /* Models */,
-				EE235F5D1C5785AC00C08960 /* Debugging */,
+				B6CD70902D22A89E00037F19 /* Debugging */,
+				B6CD708F2D22A87600037F19 /* Models */,
+				B6CD708E2D22A86000037F19 /* Targets */,
+				B6CD708D2D22A82D00037F19 /* Maker */,
+				B6CD708C2D22A81800037F19 /* DSLs */,
+				B6CD708B2D22A7F400037F19 /* Extensions */,
 				EECDB3681AC0C95C006BBC11 /* Tests */,
 				EEECE4BC2B4160D200738EF0 /* PrivacyInfo.xcprivacy */,
 			);
