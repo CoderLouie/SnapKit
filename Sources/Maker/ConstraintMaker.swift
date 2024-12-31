@@ -219,16 +219,27 @@ public class ConstraintMaker {
 }
 
 extension ConstraintMaker {
-    public var dirEdges: ConstraintMakerExtendable {
-        makeExtendableWithAttributes([.leading, .trailing, .top, .bottom])
+//    public var dirEdges: ConstraintMakerExtendable {
+//        makeExtendableWithAttributes([.leading, .trailing, .top, .bottom])
+//    }
+//    public var dirHorEdges: ConstraintMakerExtendable {
+//        makeExtendableWithAttributes([.leading, .trailing])
+//    }
+//    public var minXY: ConstraintMakerExtendable {
+//        makeExtendableWithAttributes([.leading, .top])
+//    }
+//    public var maxXY: ConstraintMakerExtendable {
+//        makeExtendableWithAttributes([.trailing, .bottom])
+//    }
+    @discardableResult
+    public func widthHeightRatioEqualTo(_ amount: ConstraintMultiplierTarget) -> ConstraintMakerEditable {
+        return makeExtendableWithAttributes(.width)
+            .equalToSelf(\.height).multipliedBy(amount)
     }
-    public var dirHorEdges: ConstraintMakerExtendable {
-        makeExtendableWithAttributes([.leading, .trailing])
+    @discardableResult
+    public func heightWidthRatioEqualTo(_ amount: ConstraintMultiplierTarget) -> ConstraintMakerEditable {
+        return makeExtendableWithAttributes(.height)
+            .equalToSelf(\.width).multipliedBy(amount)
     }
-    public var minXY: ConstraintMakerExtendable {
-        makeExtendableWithAttributes([.leading, .top])
-    }
-    public var maxXY: ConstraintMakerExtendable {
-        makeExtendableWithAttributes([.trailing, .bottom])
-    }
+
 }

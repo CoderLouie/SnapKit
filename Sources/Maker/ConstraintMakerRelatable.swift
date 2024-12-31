@@ -124,29 +124,30 @@ extension ConstraintMakerRelatable {
         if let t = item as? ConstraintLayoutGuide {
             return self.relatedTo(other(t.snp), relation: relation, file: file, line: line)
         }
-        fatalError("Expected description.item is View or LayoutGuide")
+        fatalError("Expected description.item is a View or LayoutGuide")
     }
     
     @discardableResult
-    public func equalTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+    public func equalToSelf(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
         relatedTo(other, relation: .equal, file, line)
     }
     
     @discardableResult
-    public func lessThanOrEqualTo(_ other:  (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
-        relatedTo(other, relation: .lessThanOrEqual, file, line)
-    }
-    
-    @discardableResult
-    public func greaterThanOrEqualTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, line: UInt = #line) -> ConstraintMakerEditable {
-        relatedTo(other, relation: .greaterThanOrEqual, file, line)
-    }
-    
-    func test() {
-        let v = UIView()
-        v.snp.makeConstraints { make in
-//            make.width.equalTo(\.height).multipliedBy(1.0)
-            make.verticalEdges.equalTo(0)
+    public func equalToSuper(_ other: (ConstraintViewDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+        guard let superview = self.description.item.superview else {
+            fatalError("Expected superview but found nil when attempting make constraint `equalToSuper`.")
         }
+        return relatedTo(other(superview.snp), relation: .equal, file: file, line: line)
     }
+    
+//
+//    @discardableResult
+//    public func lessThanOrEqualTo(_ other:  (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, _ line: UInt = #line) -> ConstraintMakerEditable {
+//        relatedTo(other, relation: .lessThanOrEqual, file, line)
+//    }
+//    
+//    @discardableResult
+//    public func greaterThanOrEqualTo(_ other: (any ConstraintAttributesDSL) -> ConstraintItem, _ file: String = #file, line: UInt = #line) -> ConstraintMakerEditable {
+//        relatedTo(other, relation: .greaterThanOrEqual, file, line)
+//    }
 }

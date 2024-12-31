@@ -187,3 +187,12 @@ public class ConstraintMakerExtendable: ConstraintMakerRelatable {
     }
     
 }
+
+extension ConstraintMakerExtendable {
+    
+    @discardableResult
+    public func inset(_ amount: ConstraintInsetTarget) -> ConstraintMakerEditable {
+        return equalToSuperview().inset(amount)
+    }
+
+}
